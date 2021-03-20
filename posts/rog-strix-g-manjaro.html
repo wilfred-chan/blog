@@ -1,0 +1,643 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ROG 魔霸3 双盘双系统安装Manjaro</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="27a5ba3f-31c5-4136-9e36-265669b53ba1" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🐧</span></div><h1 class="page-title">ROG 魔霸3 双盘双系统安装Manjaro</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Category</th><td><span class="selected-value select-value-color-blue">Notes</span></td></tr><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created Time</th><td><time>@Mar 16, 2021 7:17 PM</time></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>Post URL</th><td><a href="https://wilfred-chan.github.io/blog/posts/rog-strix-g-manjaro.html" class="url-value">https://wilfred-chan.github.io/blog/posts/rog-strix-g-manjaro.html</a></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Series</th><td></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><td><span class="selected-value select-value-color-green">Posted</span></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-yellow">Linux</span><span class="selected-value select-value-color-purple">Manjaro</span></td></tr></tbody></table></header><div class="page-body"><nav id="100fa8f0-a579-4aa8-8ca2-f90788235da4" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#406029b2-4c26-44b2-aebe-fb702566f044">0. 前言</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a534b5a9-0518-4978-a800-d3eeff98a853">为什么要使用Manjaro？</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7a488c81-5994-4748-a6b6-6b5478eb69c9">那你还双系统干啥？</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e5a3283f-89f8-4336-87fd-ad7428bdc695">这篇文章适合谁看？</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#158d5e58-579b-4ef1-b558-9ce4563110cc">1. 安装</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#662b96d0-bbd4-470a-b62d-0089e8525636">1.1. 镜像选择与写入</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ace53dbe-b989-4f51-a0f6-c682b22975f5">1.2. 显卡驱动问题</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#501f8585-5d98-4d4e-937c-936c645960b9">1.3. 双盘双系统安装</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#cd9fb707-c1d6-4037-bb02-79830cf9eb19">1.3.1. SATA接口副硬盘更换</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#cb8819ef-a06b-4261-8470-5a3f41ca3f6a">1.3.2. 安装与分区</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#174495a4-721e-40db-963a-e04578fc1672">1.3.3. 启动引导相关问题</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8af98912-d2d4-448a-a265-737f633aa746">2. 安装后的一些系统设置</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#76ab5d03-c964-4c8a-8dfe-862371c4140b">2.1. 电池充电阈值(充电保护)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#943647f3-2d2e-4033-8811-57a371d013fe">2.2. 双系统时间统一</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e022dd28-a771-4dc9-bba5-4a6305b74365">2.3. 键盘问题</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c8f9ef7b-a999-4052-9b7b-e64b968689cb">2.3.1. 特殊功能键</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#af414306-066b-4f8b-ab2c-b80cff13766f">2.3.2. 键盘背光</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2992126a-4d61-4d77-9efe-af91c8f36664">3. AUR相关配置</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#19a6535c-97a2-4fec-b038-ecf52a813d5c">3.1. 什么是AUR？</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#28d4782c-31c1-4c6e-a74b-cdca87011a5b">3.2. AUR Helpers</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#166e0b9d-6cc0-4eb2-b97d-a05cead427fe">3.2.1. 安装yay</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6dcdf60a-542f-420c-b54d-e89c8d8e9745">3.2.2. 安装软件包——以Chrome为例</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d710644f-b20f-45c2-8bb7-0c0bcac18c2f">3.2.3. 更新</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6362f1d8-3346-4b95-a080-eb19ddd6068c">4. 网络配置</a></div></nav><h1 id="406029b2-4c26-44b2-aebe-fb702566f044" class="">0. 前言</h1><h2 id="a534b5a9-0518-4978-a800-d3eeff98a853" class="">为什么要使用Manjaro？</h2><p id="811c4f15-8b3e-4375-aaaf-39b8a39cc724" class="">直接动机是Windows一次更新导致我所有Chromium-based浏览器打开速度变成了10秒。</p><p id="23164a4d-bbd1-4862-8fb1-8230116bb290" class="">开浏览器的速度比开机还慢。这能忍吗？</p><p id="91978369-a490-4ed8-ac31-58fd7924d284" class="">间接动机则是长期饱受Windows的垃圾软件质量的折磨（卡顿、崩溃、假死），且软件包管理系统缺失。</p><p id="a10a081b-399c-4696-a606-e6f9f60ba398" class="">比如说，Windows里上传文件，弹出的文件选择窗口，每次都会假死好几秒，Spotify打开要半分钟，1Password时不时会卡顿，而且还有数不清的已安装软件不知道怎么管理；而Linux下的Spotify, 1Password客户端，非常的简洁、快速，98%的功能都不缺。Manjaro (基于Arch Linux) 更是有爽翻天的包管理机制。</p><p id="f97dc8c5-2e99-4657-a6b1-df6ddb3251e8" class="">此外学习的时候Windows非常折磨，光是一个反斜杠就让人痛不欲生，更别说多语言支持有多差了，JDK报错都能中英混杂。</p><p id="3e3e8c37-0616-40f8-b02f-5c4b4f00a5cc" class="">Windows再一个缺点就是：分心。微信等即时通信软件非常扰乱人的工作状态，关于这点我之后会新发一篇文章详细说明我本人对于现代软件作恶属性的反抗。</p><p id="3e3bbf88-a7c5-4c32-9337-7397b92eb1c8" class="">Manjaro最大的优点就是“开箱即用的Arch Linux”，大家时间宝贵，不是每个人都有空从0开始配置自己的Arch Linux的。</p><h2 id="7a488c81-5994-4748-a6b6-6b5478eb69c9" class="">那你还双系统干啥？</h2><p id="9c31f84d-ec8f-40be-8bdb-1a2e36e3eb00" class="">Windows留着打游戏（彩虹六号萌新）和Office相关用途。</p><h2 id="e5a3283f-89f8-4336-87fd-ad7428bdc695" class="">这篇文章适合谁看？</h2><p id="641144c0-f722-4acc-bac0-8401e8cf0a31" class="">适合从来没有接触过Arch Linux但接触过其他发行版的朋友，或是想双系统的ROG笔记本用户。</p><h1 id="158d5e58-579b-4ef1-b558-9ce4563110cc" class="">1. 安装</h1><h2 id="662b96d0-bbd4-470a-b62d-0089e8525636" class="">1.1. 镜像选择与写入</h2><p id="234aef92-2093-455b-b150-1df484c1c8e6" class="">Manjaro是基于Arch Linux的发行版，所以也是滚动更新的，没有啥推荐的版本号。</p><p id="8524808b-319c-42f2-b352-70215637de88" class="">但是你可以选择自己喜欢的桌面环境，个人比较喜欢Gnome桌面，所以选择了<a href="https://manjaro.org/downloads/official/gnome/">Manjaro Genome</a>.</p><p id="624a68c5-d4fd-44b4-9606-d06c7720ae36" class="">推荐用种子下载镜像，速度可观一些。官方托管的服务器下载速度太慢了。</p><p id="bfef9c1c-ce91-4c41-975b-2cfc92452938" class="">下载好后用Rufus直接写入U盘，老版本会弹窗提示选择ISO模式/DD模式，选择DD就好了。最新版的Rufus已经支持根据镜文件自动识别写入模式了，不用自己选择。</p><h2 id="ace53dbe-b989-4f51-a0f6-c682b22975f5" class="">1.2. 显卡驱动问题</h2><p id="5187e468-daf8-4e25-a6b2-b64d37cf9703" class="">如果没有特殊需求（比如炼丹），直接选择开源驱动安装系统，即free drivers.</p><p id="acde1463-95a9-4642-8612-78418851e835" class="">亲测Nvidia专有驱动导致外接显示器掉帧，且HDMI没有音频输出。</p><p id="5fa13d67-072c-4a30-a79f-10db2c873a18" class="">开源驱动下，HDMI和Type-C音视频输出都是正常的，可以支持不同频率的外接屏幕。目前碰到的唯一问题就是有一定概率Type-C输出有问题，导致输入法浮窗在错误的屏幕上，或者识别不到外接屏，一般来说，重启即可解决问题。</p><p id="03f5d936-3f55-4051-942d-555b9db8b2af" class="">但是鉴于Windows下偶尔也会出现类似的问题，我不太认为是软件层面的问题。</p><p id="75115793-1d05-493a-8736-b155d4f49ab6" class=""><a href="https://www.youtube.com/watch?v=_36yNWw_07g">So, Nvidia, fuck you.</a></p><h2 id="501f8585-5d98-4d4e-937c-936c645960b9" class="">1.3. 双盘双系统安装</h2><p id="4aba89e5-40de-4e16-a36d-1a04354af48b" class="">单盘双系统的教程网上挺多的，双盘双系统的资料反而挺少，甚至有人说拔下Windows所在的硬盘再安装。实际上操作正确的话，并不需要拔出。</p><h3 id="cd9fb707-c1d6-4037-bb02-79830cf9eb19" class="">1.3.1. SATA接口副硬盘更换</h3><p id="90f4686e-7452-4573-8b05-1b44d7f653c6" class="">安装之前我先自行换下了魔霸3的1TB机械硬盘，更换上了数年前购买的256G SSD。</p><p id="77bab6fb-efaa-4a49-96b0-9f8d26069f16" class="">关于拆机：<a href="https://www.bilibili.com/video/BV17k4y167oe/">https://www.bilibili.com/video/BV17k4y167oe/</a></p><p id="1e83e17c-5709-4ac8-82c0-da70a4e66493" class="">关于电池排线：<a href="https://www.bilibili.com/video/BV1j5411n7eg/">https://www.bilibili.com/video/BV1j5411n7eg/</a></p><p id="003ff541-38a8-4885-8193-2e7c083639bd" class="">换好硬盘后，登录Windows，进入磁盘管理，找到新换上的硬盘，删除卷，然后插上U盘，重启。</p><h3 id="cb8819ef-a06b-4261-8470-5a3f41ca3f6a" class="">1.3.2. 安装与分区</h3><p id="8bc2876e-6933-4c0c-ad57-e6cbc1361ab2" class="">首先记得关闭Secure Boot功能，具体操作可以搜索相关教程。</p><p id="a350ef28-928c-47f7-807e-9c49f98551ae" class="">（安装Ubuntu则不需要关闭，Manjaro实际具体情况不清楚，但是我还是随大流关闭了）</p><p id="ed033c0b-4e09-4a84-b775-955b89491070" class="">重启后狂按F9屏幕会提示“请稍候…”说明成功进入UEFI。UEFI中，按F8选择从U盘启动。</p><p id="cb6a8c02-5729-4051-9f57-5474efa53aec" class="">启动后让你选择用开源驱动还是Nvidia私有驱动启动live环境，如果无特殊需要，建议选择boot with free drivers选项，即开源驱动。</p><p id="930ce78d-15de-483c-bfc9-a253b923432a" class="">进入Live环境后有一个Welcome to Manjaro的窗口，点击Launch Installer开始安装。</p><p id="cb0d9c61-c4c6-41bc-ab22-53c6f6c4f682" class="">大部分选项没啥好说的，其他教程都有说明，主要是分区这块需要注意。</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="eb4ef146-02fb-4045-800b-5790da1d16e7"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">请务必注意分区这一步的磁盘要选择正确，否则Windows所在硬盘的所有数据将丢失！</div></figure><p id="c1ae6da9-e1c2-4f95-9fa6-89c6e86de2b5" class="">双盘双系统的情况下，如果你不会自定义分区，请选择要安装Manjaro的硬盘，然后选择Erase Disk；如果你会自定义分区的话估计也不用多说了。关于Swap分区，不建议选择Swap with hibernation，双系统尽量不要用Hibernation，Suspend就完事了。</p><p id="438c925a-1f61-4a97-90c9-d69a87b65bc2" class="">安装完毕后，重启会进入grub菜单（UEFI中的启动设备也对应变更为Manjaro所在硬盘），一般情况下会有Windows系统的入口。</p><h3 id="174495a4-721e-40db-963a-e04578fc1672" class="">1.3.3. 启动引导相关问题</h3><p id="22c33cab-b1c6-4d1f-8a9b-43793d57d72b" class="">双盘双系统的好处就是两个盘的EFI启动引导分区都在，互不影响。玩坏了grub也不用担心启动不了Windows，UEFI直接切换启动设备就行。</p><p id="0920a862-b093-4168-acd6-5c87518fc154" class="">好巧不巧，我因为装了两遍Manjaro，第二次安装后的grub有点问题，Windows入口不能正常启动Win10。于是用UEFI界面切换启动设备：开机启动后，选择UEFI Firmware Settings，然后等待重启后进入UEFI菜单按F8，选择Windows所在硬盘启动即可。</p><p id="93af4bf1-01c7-4c49-919d-7c2524ddcf4e" class="">但是你或许不想每次开机都看见一个不能用的Windows入口在grub菜单里，亦或是你想直接默认进入Manjaro，那么这么操作即可：</p><ol id="2db4376d-342f-4999-b13a-ef99a1cb269f" class="numbered-list" start="1"><li>首先在Manjaro终端下输入<code>sudo update-grub</code>，删除grub里面的windows入口：<p id="7d0244e0-e77c-4d7f-8815-9d5385bcc815" class="">因为是双硬盘，Manjaro开机是不会挂载Windows所在硬盘，于是乎更新后的grub菜单不会有Windows入口，开机也会跳过grub菜单直接启动Manjaro</p></li></ol><ol id="337993ee-b746-469c-ad26-2a3ef6406588" class="numbered-list" start="2"><li>如果需要启动Windows，开机时长按Shift。这样就会进入grub菜单。在grub菜单中选择UEFI Firmware Settings，等待重启后按F8，选择Windows所在的硬盘启动。</li></ol><h1 id="8af98912-d2d4-448a-a265-737f633aa746" class="">2. 安装后的一些系统设置</h1><h2 id="76ab5d03-c964-4c8a-8dfe-862371c4140b" class="">2.1. 电池充电阈值(充电保护)</h2><p id="40f49b33-6d5b-4aef-bc7c-6a861ea4b07a" class="">Arch Linux内核也对ASUS系列笔记本的充电阈值进行了支持。</p><p id="f6d5c382-6fd8-4490-a5c7-7d0e11197bb2" class="">修改此文件的数值即可设定充电阈值为80%。</p><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css')</style><pre id="c884ee4d-fb80-4ead-bac7-8fbadc089745" class="code"><code><span class="token builtin class-name">echo</span> <span class="token number">80</span> <span class="token operator">></span> /sys/class/power_supply/BAT0/charge_control_end_threshold
+<span class="token comment"># Setting threshold to 80%</span></code></pre><p id="82402c50-3d59-4710-9742-ae5ac44fb65b" class="">不过每次重启会导致该文件被重置，Arch Linux也给出了解决方案：加一个Systemd Service</p><p id="99c7c5c4-5889-4090-a925-ee21b75d16fd" class="">具体请参考：</p><figure id="98819ecb-f085-46de-8cbb-e759e3f5f427"><a href="https://wiki.archlinux.org/index.php/Laptop/ASUS" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Laptop/ASUS</div><div class="bookmark-description">See also Wikipedia:Asus. Kernel 5.4 brought the ability to set the battery charge threshold for some Asus laptops, by modifying the charge_control_end_threshold variable exposed under /sys/class/power_supply/BAT0/ [1] [2]. By default this value is set to 100 and reset on every power cycle[3].</div></div><div class="bookmark-href"><img src="https://wiki.archlinux.org/favicon.ico" class="icon bookmark-icon"/>https://wiki.archlinux.org/index.php/Laptop/ASUS</div></div></a></figure><h2 id="943647f3-2d2e-4033-8811-57a371d013fe" class="">2.2. 双系统时间统一</h2><p id="3ec05f04-5a69-410f-94df-0645ca44e1b4" class="">双系统还有一个缺点，就是两个系统会有时间差，可以通过修改Windows注册表来实现时间统一。</p><p id="f3bd4072-be01-4d56-ada1-97efc388bc8a" class="">具体可以参考这个Arch Wiki页面：</p><figure id="11bb3b0c-1f49-4d41-8bf1-bcf5f625e3d4"><a href="https://wiki.archlinux.org/index.php/System_time_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#Windows_%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8_UTC" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">System time (简体中文)</div><div class="bookmark-description">一个操作系统通过如下内容确定时间：时间数值、时间标准、时区和夏令时调节(中国已经废止)。本文分别介绍各个部分的定义及如何设置他们。要维护准确的系统时间，请参考 网络时间协议 一文。 系统用两个时钟保存时间：硬件时钟和系统时钟。 硬件时钟(即实时时钟 RTC 或 CMOS 时钟)仅能保存：年、月、日、时、分、秒这些时间数值，无法保存时间标准(UTC 或 localtime)和是否使用夏令时调节。 系统时钟(即软件时间) 与硬件时间分别维护，保存了：时间、时区和夏令时设置。Linux 内核保存为自 UTC 时间 1970 年1月1日经过的秒数。初始系统时钟是从硬件时间计算得来，计算时会考虑/etc/adjtime 的设置。系统启动之后，系统时钟与硬件时钟独立运行，Linux 通过时钟中断计数维护系统时钟。 因为系统时间是按 32 位整数保存的，最大只能记到 2038 年，所以 32 位 Linux 系统将在 2038 年停止工作。 大部分操作系统的时间管理包括如下方面： 启动时根据硬件时钟设置系统时间 运行时通过时间同步联网校正时间 关机时根据系统时间设置硬件时间 下面命令可以获得硬件时间和系统时间(硬件时钟按 localtime 显示): $ timedatectl 设置系统时间的本地时间： # timedatectl set-time &quot;yyyy-MM-dd hh:mm:ss&quot; 例如: # timedatectl set-time</div></div><div class="bookmark-href"><img src="https://wiki.archlinux.org/favicon.ico" class="icon bookmark-icon"/>https://wiki.archlinux.org/index.php/System_time_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#Windows_%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8_UTC</div></div></a></figure><h2 id="e022dd28-a771-4dc9-bba5-4a6305b74365" class="">2.3. 键盘问题</h2><h3 id="c8f9ef7b-a999-4052-9b7b-e64b968689cb" class="">2.3.1. 特殊功能键</h3><p id="31a94a8e-db72-4d34-a0f3-8881e5ff6f0e" class="">顶部五个特殊功能键，音量增减可以正常使用；Fn组合功能键中，F5—F12的组合功能键都不能使用。并且经过我的研究，这些按键无法识别是因为驱动层面的问题，所以目前来看是无解的。但是基本上不影响使用。</p><h3 id="af414306-066b-4f8b-ab2c-b80cff13766f" class="">2.3.2. 键盘背光</h3><p id="e23c86ea-f637-4578-b6ed-4fcb48409dd0" class="">双系统下，Manjaro貌似是直接继承上一次Windows关机前的设置。而我Windows下键盘背光一直都是白色长亮，所以Manjaro下，我的键盘背光也是白色长亮，我也没有再去折腾了。但是还是可以折腾的。</p><p id="137c02f8-aeb7-46e1-9dc2-fd8c1d3cf509" class="">如果你需要自定义键盘背光，请参考ROGAuraCore项目。</p><p id="2ce16e48-483b-4ece-9bdb-1426ba8e7077" class="">AUR可以直接安装。关于AUR，参见下一章。</p><figure id="3d8d35f0-2bf3-40f3-b8de-46cf02b2e63e"><a href="https://github.com/wroberts/rogauracore" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">wroberts/rogauracore</div><div class="bookmark-description">(c) 2019 Will Roberts Linux-compatible open-source libusb implementation similar to the ROG Aura Core software. Supports RGB keyboards with IDs 0b05:1854 (GL553, GL753), 0b05:1869 (GL503, FX503, GL703) and 0b05:1866 (GL504, GL703, GX501, GM501).</div></div><div class="bookmark-href"><img src="https://github.com/favicon.ico" class="icon bookmark-icon"/>https://github.com/wroberts/rogauracore</div></div></a></figure><h1 id="2992126a-4d61-4d77-9efe-af91c8f36664" class="">3. AUR相关配置</h1><p id="61bf3ba6-ddfe-4635-9672-e2ae5424c297" class="">Manjaro是基于Arch Linux的，所以包管理上完全可以用Arch Linux的pacman以及AUR。</p><p id="93c7b9c3-ee9a-40c0-816f-51a907a8ebea" class="">其他发行版的用户第一次接触Arch Linux的包管理可能会有点懵逼，但是其实更简单更好用。</p><p id="b249d5f1-0d0c-4ad6-b371-97c8563c746a" class="">以下介绍一下基本用途，更多的用途参考Arch Wiki即可。</p><h2 id="19a6535c-97a2-4fec-b038-ecf52a813d5c" class="">3.1. 什么是AUR？</h2><p id="e2f3685a-32b0-4728-83b1-a73f517e260a" class=""><code>pacman</code>类似于Ubuntu下的<code>apt-get</code>. <code>pacman</code>可以安装Arch Linux官方提供的软件包，但是众所周知大部分的Linux发行版的软件包数量少的可怜，于是Arch Linux社区有了AUR。AUR全称Archlinux User Repository，简单来说就是社区驱动的软件包仓库，任何人都可以自己打包软件到AUR。</p><p id="3d8fa24b-be45-4010-ae6d-f88eb132bad6" class="">用户可以直接使用<code>pacman</code>手动安装AUR上的包，具体操作可以参考Arch Wiki的相关页面。但是介于每次安装都要敲一通重复的命令，自动化的解决方案——AUR helpers，就出现了。</p><h2 id="28d4782c-31c1-4c6e-a74b-cdca87011a5b" class="">3.2. AUR Helpers</h2><p id="d3e84e9f-e7b9-4573-a5a4-37bf16399fe7" class="">常见且还在持续更新的AUR helpers有yay, paru, aurutils, pikaur，这里以本人使用的<a href="https://github.com/Jguer/yay">yay</a>为例。</p><p id="6e456f95-0f3c-42f1-8afe-aeba6b13d9d8" class="">yay支持同时管理AUR包与官方包，所以在安装了yay后，pacman一般是不会再用了。</p><h3 id="166e0b9d-6cc0-4eb2-b97d-a05cead427fe" class="">3.2.1. 安装yay</h3><p id="0b1a3bb4-6f56-45a1-b25e-bfaf28a7d7d1" class="">安装yay的过程其实本质上就是使用pacman手动安装AUR包。</p><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css')</style><pre id="f6fc98dc-1bb4-44e9-a62d-7c85b24ac941" class="code"><code>pacman -S --needed <span class="token function">git</span> base-devel
+<span class="token function">git</span> clone https://aur.archlinux.org/yay.git
+<span class="token builtin class-name">cd</span> yay
+makepkg -si</code></pre><h3 id="6dcdf60a-542f-420c-b54d-e89c8d8e9745" class="">3.2.2. 安装软件包——以Chrome为例</h3><ol id="6b566d56-0f77-4bc1-9d5d-6377fb894a20" class="numbered-list" start="1"><li>首先使用<code>yay -Ss google chrome</code>搜索相关包。<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css')</style><pre id="7319014e-f089-4812-8bd9-af09c0d4259e" class="code"><code><span class="token punctuation">..</span>.
+aur/chromium-dev <span class="token number">89.0</span>.4381.6-1 <span class="token punctuation">(</span>+159 <span class="token number">0.37</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>Out-of-date: <span class="token number">2021</span>-03-03<span class="token punctuation">)</span> 
+    The open-source project behind Google Chrome <span class="token punctuation">(</span>Dev Channel<span class="token punctuation">)</span>
+aur/google-chrome-beta <span class="token number">90.0</span>.4430.30-1 <span class="token punctuation">(</span>+351 <span class="token number">0.91</span><span class="token punctuation">)</span> 
+    The popular and trusted web browser by Google <span class="token punctuation">(</span>Beta Channel<span class="token punctuation">)</span>
+aur/chromium-snapshot-bin <span class="token number">91.0</span>-1 <span class="token punctuation">(</span>+499 <span class="token number">0.62</span><span class="token punctuation">)</span> 
+    The open-source project behind Google Chrome <span class="token punctuation">(</span>Latest Snapshot<span class="token punctuation">)</span>
+aur/google-chrome-dev <span class="token number">91.0</span>.4449.6-1 <span class="token punctuation">(</span>+634 <span class="token number">0.60</span><span class="token punctuation">)</span> 
+    The popular and trusted web browser by Google <span class="token punctuation">(</span>Dev Channel<span class="token punctuation">)</span>
+aur/google-chrome <span class="token number">89.0</span>.4389.90-1 <span class="token punctuation">(</span>+2000 <span class="token number">28.87</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>Installed<span class="token punctuation">)</span>
+    The popular and trusted web browser by Google <span class="token punctuation">(</span>Stable Channel<span class="token punctuation">)</span></code></pre><p id="c6184d62-9da8-429d-a289-6893519dc32e" class="">搜索结果的最后一行就是我们需要的稳定版本Chrome信息，如果想尝鲜也可以装开发版亦或是Chromium。</p></li></ol><ol id="5ea87526-66d3-40ff-93c6-e22868d6693f" class="numbered-list" start="2"><li><code>yay -S google-chrome</code> 安装Chrome</li></ol><ol id="a03b1ab2-6eb1-42bd-84bd-4278317a32c7" class="numbered-list" start="3"><li>按照提示操作，yay会提示&quot;Diffs to show?&quot;，新手一般敲N（即None）就行。主要就是显示一下这个版本和上一个版本的<code>PKGBUILD</code>差异。</li></ol><ol id="cbe38224-913e-433d-a54a-07d2c9cbdb40" class="numbered-list" start="4"><li>DONE!</li></ol><h3 id="d710644f-b20f-45c2-8bb7-0c0bcac18c2f" class="">3.2.3. 更新</h3><p id="f2b83e6b-ef03-44f6-b239-baf515b69ca1" class="">由于yay本质上还是在用pacman管理包，所以yay也可以帮你管理官方源的包与官方的系统更新。</p><p id="dbb99691-4f5f-4137-aa63-4a55a7559f9b" class="">输入<code>yay -Syu</code>或者直接输入<code>yay</code>，将会检查所有可更新的包（包括系统的更新）。</p><h1 id="6362f1d8-3346-4b95-a080-eb19ddd6068c" class="">4. 网络配置</h1><p id="0cfbfe01-4906-46bb-817b-bdc9ee23b96d" class="">推荐大家使用软路由，这样子就不用每次安装Linux之后苦哈哈的配置源和代理了。</p><p id="4ea385c0-13ad-448e-9f9a-e67ed1a8089a" class="">所以我也没有做任何配置，无法提供相关信息。但是网上还是有不少添加源的教程，也是比较简单的。至于代理的话，有点折腾，建议软路由。</p><p id="0d18f356-b246-4028-a5b9-4c73839c9298" class="">如需要软路由的入门信息，可以在Github Issues里提。我有时间会单独发一篇软路由教程。</p><p id="7daafbe4-739f-440b-809b-07ce19fd1d81" class="">
+</p><hr id="d0876ed8-c777-493b-8a78-b3a62cc1914d"/><p id="ba660f3b-6f36-4ce7-87db-914be9bfee4f" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e785bddd-9b77-4979-9f25-8a1b5069446d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">如有疑问或建议，欢迎于本博客所在仓库发起New Issue，并同时附上此文章的URL。</div></figure></div></article></body></html>
