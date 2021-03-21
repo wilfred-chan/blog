@@ -6,6 +6,8 @@ https://wilfred-chan.github.io/blog/
 
 ### Blog in English
 
-For English version of my blog, please check out:
+I store my Chinese contents in this repo.
 
-https://medium.com/@Wilfred-Chan
+For English contents of my blog, please check out:
+
+https://wilfred-chan.medium.com/
