@@ -10,4 +10,4 @@ I store my Chinese contents in this repo.
 
 For English contents of my blog, please check out:
 
-https://wilfred-chan.medium.com/
+https://chen6324.medium.com/
